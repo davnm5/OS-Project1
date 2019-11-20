@@ -46,8 +46,6 @@ void shell(char *arg)
         {
             if (chdir(args[1]) == -1)
                 perror("chdir");
-            else
-                chdir(args[1]);
         }
 
         // fork child and execute program
