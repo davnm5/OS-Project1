@@ -3,58 +3,51 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/wait.h>
-
-#define PRMTSIZ 255
-#define MAXARGS 63
-#define EXIT "exit"
-#define CD "cd"
+#include "../include/csapp.h"
 
 void shell(char *arg)
 {
     for (;;)
     {
-        char input[PRMTSIZ + 1] = {0x0};
+        char input[PRMTSIZE + 1] = {0x0};
         char *ptr = input;
         char *args[MAXARGS + 1] = {NULL};
         int wstatus;
         char wd[256];
 
-        // prompt
-        printf("SO<%s>sh:%s%s", arg, getcwd(wd, sizeof(wd)), "$");
-        fgets(input, PRMTSIZ, stdin);
+        printf("SO<%s>sh:%s%s", arg, getcwd(wd, sizeof(wd)), "$"); //prompt, muestra el directorio actual haciendo uso de la llamada al sistema getcwd(a,b)
+        fgets(input, PRMTSIZE, stdin);                             //la entrada estandar se alamacena en el array input;
 
-        // ignore empty input
-        if (*ptr == '\n' || *ptr == ' ')
+        // el puntero ignora las entradas con espacios en blanco,saltos de linea y tabs
+        if (*ptr == '\n' || *ptr == ' ' || *ptr == '\t')
             continue;
 
-        // convert input line to list of arguments
-        for (int i = 0; i < sizeof(args) && *ptr; ptr++)
+        // se convierte cada linea ingresada a una lista de argumentos
+        for (unsigned int i = 0; i < sizeof(args) && *ptr; ptr++)
         {
-            if (*ptr == ' ')
+            if (*ptr == ' ' || *ptr == '\t')
                 continue;
             if (*ptr == '\n')
                 break;
-            for (args[i++] = ptr; *ptr && *ptr != ' ' && *ptr != '\n'; ptr++);
+            for (args[i++] = ptr; *ptr && *ptr != ' ' && *ptr != '\n' && *ptr != '\t'; ptr++)
+                ;
             *ptr = '\0';
         }
 
-        // built-in: exit
-        if (strcmp(EXIT, args[0]) == 0)
+        if (strcmp(EXIT, args[0]) == 0) //si el comando es exit se invoca a la llamada del sistema exit()
             exit(0);
-        // built-in: cd
-        if (strcmp(CD, args[0]) == 0)
+
+        if (strcmp(CD, args[0]) == 0) //si el comando es cd se invoca a la llamada del sistema chdir(directorio)
         {
             if (chdir(args[1]) == -1)
                 perror("chdir");
         }
 
-        // fork child and execute program
-        signal(SIGINT, SIG_DFL);
         if (fork() == 0)
-            exit(execvp(args[0], args));
-        signal(SIGINT, SIG_IGN);
+            exit(execvp(args[0], args)); //el proceso hijo ejecuta el programa recibido
+        signal(SIGINT, SIG_IGN);         //ignora la señal de interrupción
 
-        // wait for program to finish
+        // espera a que el programa finalice
         wait(&wstatus);
     }
 }
@@ -63,8 +56,9 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        printf("Usage:: ./shell <student_id>\n");
+        printf("Uso:: ./shell <student_id>\n");
         return 0;
     }
-    else shell(argv[1]);
+    else
+        shell(argv[1]);
 }
