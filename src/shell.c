@@ -7,16 +7,16 @@
 
 void shell(char *arg)
 {
-    for (;;)
+    while (1) //ciclo indefinido hasta que se ejecute exit().
     {
-        char input[PRMTSIZE + 1] = {0x0};
+        char input[SIZE] = {0x0}; //array para la entrada
         char *ptr = input;
-        char *args[MAXARGS + 1] = {NULL};
+        char *args[MAXARGS] = {NULL}; //array para los argumentos de los comandos
         int wstatus;
-        char wd[256];
+        char wd[SIZE] = {0x0};
 
         printf("SO<%s>sh:%s%s", arg, getcwd(wd, sizeof(wd)), "$"); //prompt, muestra el directorio actual haciendo uso de la llamada al sistema getcwd(a,b)
-        fgets(input, PRMTSIZE, stdin);                             //la entrada estandar se alamacena en el array input;
+        fgets(input, SIZE, stdin);                                 //la entrada estándar se almacena en el array input
 
         // el puntero ignora las entradas con espacios en blanco,saltos de linea y tabs
         if (*ptr == '\n' || *ptr == ' ' || *ptr == '\t')
@@ -27,7 +27,7 @@ void shell(char *arg)
         {
             if (*ptr == ' ' || *ptr == '\t')
                 continue;
-            if (*ptr == '\n')
+            if (*ptr == '\n') //cuando hay un salto de línea se sale del ciclo y hasta ahí se llenará la lista de argumentos.
                 break;
             for (args[i++] = ptr; *ptr && *ptr != ' ' && *ptr != '\n' && *ptr != '\t'; ptr++)
                 ;
@@ -39,8 +39,12 @@ void shell(char *arg)
 
         if (strcmp(CD, args[0]) == 0) //si el comando es cd se invoca a la llamada del sistema chdir(directorio)
         {
-            if (chdir(args[1]) == -1)
-                perror("chdir");
+            if(args[1]==NULL){ //si el comando cd no especifíca el directorio, entonces se lo lleva al directorio raíz.
+                chdir("/");
+            }
+            
+            else if (chdir(args[1]) == -1) //si el directorio no existe se muestra el mensaje de error
+                perror("Error");
         }
 
         if (fork() == 0)
@@ -54,11 +58,11 @@ void shell(char *arg)
 
 int main(int argc, char *argv[])
 {
-    if (argc != 2)
+    if (argc != 2) //si no hay dos argumentos 
     {
         printf("Uso:: ./shell <student_id>\n");
         return 0;
     }
     else
-        shell(argv[1]);
+        shell(argv[1]); //al método shell se le envía el id del estudiante.
 }

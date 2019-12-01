@@ -1,8 +1,8 @@
 #ifndef _CSAPP_H
 #define _CSAPP_H
 
-#define PRMTSIZE 255
-#define MAXARGS 63
+#define SIZE 256
+#define MAXARGS 64
 #define EXIT "exit"
 #define CD "cd"
 #define NTHREADS 4
