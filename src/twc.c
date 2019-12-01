@@ -12,7 +12,7 @@ size_t bloque; // variable que almacena el tamaño en bytes del bloque.
 sem_t sem1, sem2; //semáforos.
 unsigned int lines = 0; //contador de líneas.
 unsigned int words = 1; //contador de palabras.
-
+int n_threads;
 /*
 Método al que acceden los hilos de forma sincronizada, se realiza el conteo de palabras y líneas.
 */
@@ -52,8 +52,8 @@ void dividir()
 {
     unsigned int inicio = 0;
     unsigned int fin = bloque;
-    pthread_t *hilos = malloc(NTHREADS * sizeof(pthread_t));// reserva de memoria para los hilos
-    for (int i = 0; i < NTHREADS; i++)
+    pthread_t *hilos = malloc(n_threads * sizeof(pthread_t));// reserva de memoria para los hilos
+    for (int i = 0; i < n_threads; i++)
     {
         estructura *argumento = malloc(sizeof(estructura)); // reserva de memoria para las estructuras
         argumento->inicio = inicio;
@@ -69,7 +69,7 @@ void dividir()
         fin = fin + bloque;
     }
 
-    for (int j = 0; j < NTHREADS; j++)
+    for (int j = 0; j < n_threads; j++)
     {
         int status = pthread_join(hilos[j], NULL); //esperando a los hilos
         if (status < 0)
@@ -100,6 +100,7 @@ int main(int argc, char *argv[])
 {
     if (argc == 3 && (strcmp(argv[1], "-l") == 0 || strcmp(argv[1], "-w") == 0))
     {
+        n_threads= sysconf(_SC_NPROCESSORS_ONLN);// devuelve la cantidad de cores disponibles en el computador
         int fd = open(argv[2], O_RDONLY); //llamada al sistema que permite abrir un archivo
         if (fd < 0)
         {

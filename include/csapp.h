@@ -5,7 +5,6 @@
 #define MAXARGS 64
 #define EXIT "exit"
 #define CD "cd"
-#define NTHREADS 4
 /*
 Estructura asignada a cada uno de los hilos, indican el inicio y fin de cada bloque
 */
