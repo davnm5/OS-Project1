@@ -38,6 +38,7 @@ Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
 
 ./bin/shell 201504956
 ```
+![Nuevo Shell](https://drive.google.com/file/d/1QvgKzQ4hhCz75k3dv2bpNn1HgYUOmi_I/view?usp=sharing)
 * **Comando twc**
 
 ```

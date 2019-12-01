@@ -15,7 +15,7 @@ void shell(char *arg)
         int wstatus;
         char wd[SIZE] = {0x0};
 
-        printf("SO<%s>sh:%s%s", arg, getcwd(wd, sizeof(wd)), "$"); //prompt, muestra el directorio actual haciendo uso de la llamada al sistema getcwd(a,b)
+        printf("\nSO<%s>sh:%s%s", arg, getcwd(wd, sizeof(wd)), "$"); //prompt, muestra el directorio actual haciendo uso de la llamada al sistema getcwd(a,b)
         fgets(input, SIZE, stdin);                                 //la entrada estándar se almacena en el array input
 
         // el puntero ignora las entradas con espacios en blanco,saltos de linea y tabs
