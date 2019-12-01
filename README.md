@@ -1,8 +1,7 @@
 
 PROYECTO PRIMER PARCIAL
 ======================
-Escuela Superior Politécnica del Litoral
-Version 1.0 01/12/2019
+Version 1.0 > 01/12/2019
 
 1 - Descripción
 ---------------
@@ -50,7 +49,11 @@ Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
 
 **NOTA:** Se creó un archivo de cabecera llamado csapp.h el cual posee ciertos identificadores usados en ambos programas.
 
-4 - Autor
+4 - Estrategia
+---------------
+
+
+5 - Autor
 -----------
 
 * José David Neira Martrus
