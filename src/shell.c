@@ -39,7 +39,7 @@ void shell(char *arg)
 
         if (strcmp(CD, args[0]) == 0) //si el comando es cd se invoca a la llamada del sistema chdir(directorio)
         {
-            if(args[1]==NULL){ //si el comando cd no especifíca el directorio, entonces se lo lleva al directorio raíz.
+            if(args[1]==NULL){ //si el comando cd no especifica el directorio, entonces se lo lleva al directorio raíz.
                 chdir("/");
             }
             
