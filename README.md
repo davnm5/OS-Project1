@@ -12,8 +12,8 @@ Version 1.0 01/12/2019
 
 El comando twc recibe los siguientes parámetros:
 
-**-w :** El número de palabras en cada archivo de entrada se escribe en la salida estándar.
-**-l :** El número de líneas en cada archivo de entrada se escribe en la salida estándar.
+* **-w :** El número de palabras en cada archivo de entrada se escribe en la salida estándar.
+* **-l :** El número de líneas en cada archivo de entrada se escribe en la salida estándar.
 
 
 2 - Compilando el proyecto
@@ -54,6 +54,3 @@ Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
 -----------
 
 * José David Neira Martrus
-=======
-# OS-Project1
-The Shell and twc command
