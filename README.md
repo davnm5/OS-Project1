@@ -38,7 +38,7 @@ Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
 
 ./bin/shell 201504956
 ```
-![Nuevo Shell](https://github.com/davnm5/OS-Project1/imagen1.png)
+![Nuevo Shell](imagen1.png)
 * **Comando twc**
 
 ```
