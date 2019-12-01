@@ -1,8 +1,7 @@
 
 PROYECTO PRIMER PARCIAL
 ======================
-Escuela Superior Politécnica del Litoral
-Version 1.0 01/12/2019
+Version 1.0 > 01/12/2019
 
 1 - Descripción
 ---------------
