@@ -63,10 +63,10 @@ La estrategia utilizada para resolver el segundo problema planteado consiste en 
 - Se usa la llamada del sistema getcwd() para mostrar en el prompt el directorio actual, es decir, si el usuario usa el comando cd para cambiar de directorio, el prompt reflejará dicho cambio.
 
 * **Comando twc**
-> Se usan dos semáforos para manejar las tres regiones críticas del programa.
-> La lectura del archivo es realizada por medio de llamadas al sistema.
-> Se utiliza asignación de memoria dinámica para hilos,buffer y estructuras, luego dicha memoria reservada es liberada cuando ya no se necesita, con la finalidad de evitar fugas de memoria.
-> Un problema detectado es busy waiting ya que mientras un hilo está en su sección crítica, cualquier otro hilo que intente ingresar debe realizar un bucle continuo en el código de entrada (spin-lock). En esta espera se desperdician los ciclos de la CPU en lugar de usarlos productivamente. Evidentemente en este programa el spin-lock puede resultar eficiente porque los bloqueos son cortos, pero si se trata de un problema más complejo en donde las secciones críticas son largas, el busy waiting provocará ineficiencia extrema. 
+> *Se usan dos semáforos para manejar las tres regiones críticas del programa.
+> *La lectura del archivo es realizada por medio de llamadas al sistema.
+> *Se utiliza asignación de memoria dinámica para hilos,buffer y estructuras, luego dicha memoria reservada es liberada cuando ya no se necesita, con la finalidad de evitar fugas de memoria.
+> *Un problema detectado es busy waiting ya que mientras un hilo está en su sección crítica, cualquier otro hilo que intente ingresar debe realizar un bucle continuo en el código de entrada (spin-lock). En esta espera se desperdician los ciclos de la CPU en lugar de usarlos productivamente. Evidentemente en este programa el spin-lock puede resultar eficiente porque los bloqueos son cortos, pero si se trata de un problema más complejo en donde las secciones críticas son largas, el busy waiting provocará ineficiencia extrema. 
 
 6 - Autor
 -----------
