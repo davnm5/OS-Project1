@@ -28,7 +28,9 @@ make shell twc
 make clean
 ```
 Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
+
 ![Make](images/imagen0.png)
+
 3 - Modo de uso general
 ------------------------
 
