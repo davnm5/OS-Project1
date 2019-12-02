@@ -1,7 +1,7 @@
 
 PROYECTO PRIMER PARCIAL
 ======================
-Version 1.0 > 01/12/2019
+Version 1.0 - 01/12/2019
 
 1 - Descripción
 ---------------
@@ -67,7 +67,7 @@ La estrategia utilizada para resolver el segundo problema planteado consiste en 
 * La lectura del archivo es realizada por medio de llamadas al sistema.
 * Se utiliza asignación de memoria dinámica para hilos,buffer y estructuras, luego dicha memoria reservada es liberada cuando ya no se necesita, con la finalidad de evitar fugas de memoria.
 
-5 - Autor
+6 - Autor
 -----------
 
 * José David Neira Martrus
