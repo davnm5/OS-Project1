@@ -17,7 +17,7 @@ void shell(char *arg)
 
         printf("\nSO<%s>sh:%s%s", arg, getcwd(wd, sizeof(wd)), "$"); //prompt, muestra el directorio actual haciendo uso de la llamada al sistema getcwd(a,b)
         fgets(input, SIZE, stdin);                                 //la entrada estándar se almacena en el array input
-
+        signal(SIGINT, SIG_IGN);//ignora la señal de interrupción
         // el puntero ignora las entradas con espacios en blanco,saltos de linea y tabs
         if (*ptr == '\n' || *ptr == ' ' || *ptr == '\t')
             continue;
@@ -47,9 +47,16 @@ void shell(char *arg)
                 perror("Error");
         }
 
-        if (fork() == 0)
-            exit(execvp(args[0], args)); //el proceso hijo ejecuta el programa recibido
-        signal(SIGINT, SIG_IGN);         //ignora la señal de interrupción
+        if (fork() == 0){
+                int aux=execvp(args[0], args);//el proceso hijo ejecuta el programa recibido
+                if(strcmp(CD, args[0]) != 0 && aux==-1){
+                    fprintf(stderr, "Error: el comando %s no existe\n",args[0]);
+                }
+                exit(aux);
+        }
+
+            
+        
 
         // espera a que el programa finalice
         wait(&wstatus);

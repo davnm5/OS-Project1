@@ -28,7 +28,7 @@ make shell twc
 make clean
 ```
 Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
-
+![Make](images/imagen0.png)
 3 - Modo de uso general
 ------------------------
 
@@ -38,7 +38,7 @@ Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
 
 ./bin/shell 201504956
 ```
-![Nuevo Shell](https://drive.google.com/file/d/1QvgKzQ4hhCz75k3dv2bpNn1HgYUOmi_I/view?usp=sharing)
+![Nuevo Shell](images/imagen1.png)
 * **Comando twc**
 
 ```
@@ -47,12 +47,24 @@ Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
 ./bin/twc -l src/test/file.txt
 
 ```
-
+![Comando twc](images/imagen2.png)
 **NOTA:** Se creó un archivo de cabecera llamado csapp.h el cual posee ciertos identificadores usados en ambos programas.
 
 4 - Estrategia
 ---------------
+La estrategia utilizada para resolver el segundo problema planteado consiste en dividir un archivo en partes iguales y conocer la cantidad de cores que tiene el computador; el propósito es asignar hilos en cada uno para maximizar el uso de los recursos, los hilos recibirán un bloque de bytes que deberán procesar (contar palabras y lineas). Se utilizan semáforos en las regiones críticas para resolver las condiciones de carrera, en este caso existen dos recursos compartidos (variables líneas y palabras) los cuales son modificados por hilos de forma sincronizada gracias al uso de los semáforos. A continuación, se puede observar el diagrama de la estrategia utilizada.
+![Diagrama](images/imagen3.png)
 
+5.- Problemas y funcionalidades extras
+---------------
+**Shell** 
+* Se tuvo que Ignorar la señal SIGINT>CTRL+C en el proceso padre, ahora se puede interrumpir un proceso hijo sin matar al programa shell, la forma de salir es por medio de exit o deteniéndolo con una señal SIGTSTP.
+* Se usa la llamada del sistema getcwd() para mostrar en el prompt el directorio actual, es decir, si el usuario usa el comando cd para cambiar de directorio, el prompt reflejará dicho cambio.
+
+**Comando twc**
+* Se usan dos semáforos para manejar las tres regiones críticas del programa.
+* La lectura del archivo es realizada por medio de llamadas al sistema.
+* Se utiliza asignación de memoria dinámica para hilos,buffer y estructuras, luego dicha memoria reservada es liberada cuando ya no se necesita para evitar fugas de memoria.
 
 5 - Autor
 -----------

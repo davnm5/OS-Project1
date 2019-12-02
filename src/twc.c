@@ -41,7 +41,7 @@ void *contador(void *arg)
             sem_post(&sem2);
         }
     }
-    free(argumento);// se libera la memoria asiganada a la estructura
+    free(argumento);// se libera la memoria asignada a la estructura
     return (void *)0;
 }
 
