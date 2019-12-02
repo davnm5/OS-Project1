@@ -113,12 +113,12 @@ int main(int argc, char *argv[])
             sem_init(&sem1, 0, 1); //se inicializa el semáforo para el contador de líneas
             sem_init(&sem2, 0, 1); //se inicializa el semáforo para el contador de palabras
             size_t size = lseek(fd, 0, SEEK_END); //llamada al sistema que devuelve el tamaño del archivo en bytes desde el inicio hasta el fin.
-            if (size % 4 != 0)
+            if (size % n_threads != 0)
                 size = size + 1;
             buffer = (unsigned char *)calloc(size, sizeof(unsigned char)); //se asigna la cantidad justa de memoria para el archivo,los bloques se inicializan con cero.
             lseek(fd, 0, SEEK_SET); //llamada al sistema que ubica el desplazamiento del archivo en el inicio.
             read(fd, buffer, size); //llamada al sistema que permite leer desde un descriptor de archivo.
-            bloque = size / 4;
+            bloque = size / n_threads;
             dividir();
             imprimir(argv[1]);
             free(buffer); //se libera la memoria asignada al buffer
