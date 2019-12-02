@@ -39,7 +39,7 @@ Se generarán los ejecutables **shell** y **twc** en el directorio **/bin**
 ./bin/shell <student_id>
 
 ```
-![Nuevo Shell](imagen1.png)
+![Nuevo Shell](images/imagen1.png)
 * **Comando twc**
 
 ```
